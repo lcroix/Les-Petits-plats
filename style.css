@@ -1,0 +1,225 @@
+body {
+  margin: 50px 100px;
+  font-family: "Lato", sans-serif;
+  margin: 0;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+header img {
+  width: 270px;
+}
+.search-container {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+#search {
+  padding: 10px 35px 10px 10px;
+  margin: 0 85px;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: right center;
+  width: 96%;
+  background-color: #e7e7e7;
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+}
+.search-container img {
+  position: absolute;
+  right: 20px;
+}
+
+.dorpdown_section {
+  display: flex;
+  margin: 25px 85px;
+}
+
+.dropdown {
+  position: relative;
+  width: 160px;
+  margin-right: 40px;
+  color: white;
+  transition: width 0.3s ease-out;
+}
+
+.dropdown-search {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  color: white;
+  border-bottom: 1px solid #ccc;
+
+  border-radius: 5px;
+}
+
+.dropdown-search::placeholder {
+  color: white;
+}
+
+.dropdown-menu {
+  margin: 0px 60px;
+  overflow: hidden;
+  border-radius: 5px;
+  display: inline-block;
+  white-space: nowrap;
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+}
+.dropdown-menu::-webkit-scrollbar {
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  padding: 14px 16px;
+  background-color: inherit;
+  width: 95%;
+  height: 65px;
+  color: white;
+  cursor: pointer;
+}
+
+#ingredients,
+#ingredients + ul {
+  background-color: #3282f7;
+}
+
+#appareils,
+#appareils + ul {
+  background-color: #68d9a4;
+}
+#ustensils,
+#ustensils + ul {
+  background-color: #ed6454;
+}
+
+.appareil {
+  width: 30%;
+  padding: 10px 0px 10px 10px;
+  cursor: pointer;
+}
+.ustensil {
+  width: 30%;
+  padding: 10px 0px 10px 10px;
+  cursor: pointer;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translateY(-50%);
+  user-select: none;
+  font-size: 12px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.dropdown-arrow.active {
+  transform: translateY(-50%) rotate(180deg);
+}
+.dropdown .options {
+  position: absolute;
+  top: 30px;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  /* display: none; */
+}
+
+.dropdown.active .options {
+  display: flex;
+  flex-direction: column;
+}
+.fa-magnifying-glass {
+  position: absolute;
+  background: rgba(255, 255, 255, 0);
+  font-size: 32px;
+  margin-left: -2%;
+  margin-top: 1%;
+  width: 50px;
+  height: 50px;
+}
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: 35px;
+  margin: 35px 50px;
+}
+.recipe {
+  width: 400px;
+  height: 465px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.timer {
+  height: 50%;
+  background-color: #c7bebe;
+}
+.infoFirstDiv {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.recipeName {
+  font-size: 18px;
+  width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.infoSecondDiv {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  overflow: hidden;
+  margin-top: -30px;
+}
+.ingredient {
+  display: flex;
+  font-size: 12px;
+}
+div.ingredients {
+  width: 55%;
+}
+.descriptionText {
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  width: 50%;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  font-family: "Roboto";
+  overflow: hidden;
+}
+.infoContainer {
+  height: 50%;
+  background-color: #e7e7e7;
+  padding: 0 20px 0 20px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 400;
+}
