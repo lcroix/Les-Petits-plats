@@ -1,48 +1,105 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+  <head>
     <link href="./style.css" rel="stylesheet" type="text/css" />
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Les-Petits-Plats</title>
-</head>
-<body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.png" />
+  </head>
+  <body>
     <header>
-        <img src="./assets/logo_lespetitsplats.png" alt="Les petits plats">
+      <img class="logo_lespetitsplats" src="./assets/logo_lespetitsplats.png" alt="Les petits plats" />
     </header>
-    <main>
-        <div class="search-container" >
-            <input type="text" id="search" name="q" placeholder="Rechercher une recette" data-toggle>
-            <i class="fa-solid fa-magnifying-glass" onclick=""></i>
-             </div>
-             <div class="dorpdown_section">
-                <div class="dropdown ingredient">
-               <input type="text" class="dropdown-search" placeholder="Ingredients" id="ingredients" data-toggle>
-               <ul class="options" id="options_ingredients">
-                 
-               </ul>
-               <div class="dropdown-arrow">&#9660;</div>
-             </div>
-             <div class="dropdown appareils">
-                <input type="text" class="dropdown-search" placeholder="Appareils" id="appareils" data-toggle>
-                <ul class="options" id="options_appareils">
-                </ul>
-                <div class="dropdown-arrow">&#9660;</div>
+    <main class="container">
+
+      <!-- Zone de recherche -->
+      <div id="search-zone">
+
+          <div class="input-group-sm">
+              <div class="input-box mx-auto">
+                  <input type="text" class="form-control border-0 mb-4" placeholder="Rechercher une recette">
+                  <img src="./assets/search.svg" alt="icone loupe de la zone de recherche">
               </div>
-               <div class="dropdown ustensils">
-                <input type="text" class="dropdown-search" placeholder="Ustensils" id="ustensils" data-toggle>
-                <ul class="options" id="options_ustensile">
-              
-                </ul>
-                <div class="dropdown-arrow">&#9660;</div>
+          </div>
+
+      </div>
+
+      <!-- Zone de tags -->
+      <div id="tags-zone" class="mt3 d-inline-flex flex-row justify-content-start align-items-center"></div>
+
+      <!-- Zone filtres de recettes -->
+      <div id="filters-zone">
+          <div class="accordion" id="accordionFilterTags">
+              <div class="accordion-item me-lg-5">
+                  <div class="accordion-header" id="headingOne">
+                      <div id="ingredientButtonHeader" class="filter_button accordion-button collapsed" data-bs-toggle="collapse"
+                          data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                          role="combobox">
+                          <input id="ingredient-input" class="form-control text-white" type="text"
+                              placeholder="Ingredients" aria-label="input ingredients">
+                              <div class="dropdown-arrow_down">&#9660;</div>
+                              <div class="dropdown-arrow_up">&#9650;</div>
+
+                      </div>
+                  </div>
+                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                      data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                          <ul id="ingredientsList"></ul>
+                      </div>
+                  </div>
               </div>
-              
+              <div class="accordion-item me-lg-5 mt-3 mt-lg-0">
+                  <div class="accordion-header" id="headingTwo">
+                      <div id="applianceButtonHeader" class="filter_button accordion-button collapsed" data-bs-toggle="collapse"
+                          data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
+                          role="combobox">
+                          <input id="appliance-input" class="form-control text-white" type="text"
+                              placeholder="Appareils" aria-label="input appliances">
+                              <div class="dropdown-arrow_down">&#9660;</div>
+                              <div class="dropdown-arrow_up">&#9650;</div>
+
+                      </div>
+                  </div>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                      data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                          <ul id="appliancesList"></ul>
+                      </div>
+                  </div>
               </div>
-        <section class="card"></section>
-    </main>
+              <div class="accordion-item mt-3 mt-lg-0">
+                  <div class="accordion-header" id="headingThree">
+                      <div id="ustensilsButtonHeader" class="filter_button accordion-button collapsed" data-bs-toggle="collapse"
+                          data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
+                          role="combobox">
+                          <input id="ustensils-input" class="form-control text-white" type="text"
+                              placeholder="Ustensiles" aria-label="input ustensils">
+                              <div class="dropdown-arrow_down">&#9660;</div>
+                              <div class="dropdown-arrow_up">&#9650;</div>
+                      </div>
+                  </div>
+                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                      data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                          <ul id="ustensilsList"></ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Zone d'affichage des recettes -->
+      <section id="recipes-zone" class="card" aria-label="liste des recettes"></section>
+  </main>
     <script src="./page/index.js"></script>
     <script src="./factories/index.js"></script>
     <script src="./factories/tag.js"></script>
-</body>
+  </body>
 </html>

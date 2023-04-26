@@ -1,88 +1,58 @@
-const ingredientSet  = new Set();
-const ustensileSet  = new Set();
-const appareilSet  = new Set();
+function dropdownBehaviour(data) {
+  const ingredientSet = new Set();
+  const ustensileSet = new Set();
+  const appareilSet = new Set();
 
-const dropdown1 = document.querySelector("#ingredients")
-const dropdown2 = document.querySelector("#appareils")
-const dropdown3 = document.querySelector("#ustensils")
+//   const optionUstensiles = document.querySelector("#options_ustensile");
+//   const optionAppareil = document.querySelector("#options_appareils");
+  const { ingredients } = data;
+  ingredients.forEach((element) => {
+    const { ingredient } = element;
 
-const optionIngredients = document.querySelector("#options_ingredients")
-const optionUstensiles = document.querySelector("#options_ustensile")
-const optionAppareil = document.querySelector("#options_appareils")
+    ingredientSet.add(ingredient);
+  });
 
-function getIngredients(data) {
-    const  {ingredients} = data;
-    ingredients.forEach(element => {
-        const {ingredient} = element;
-        
-        ingredientSet.add(ingredient)
-        
-    });
-}
+  const { appliance } = data;
 
-function getAppliance(data) {
-    const  {appliance} = data;
-    console.log(data);
-    appareilSet.add(appliance);
-}
+  appareilSet.add(appliance);
 
-function getUstensils(data) {
-    const  {ustensils} = data;
+  const { ustensils } = data;
 
-    ustensils.forEach(element => {
+  ustensils.forEach((element) => {
     ustensileSet.add(element);
-    });
-}
+  });
 
-dropdown1.onclick = function() {
-    dropdown1.classList.toggle("active")
-}
+  ingredientSet.forEach((element) => {
+    const optionIngredients = document.querySelector("#ingredientsList");
+    const divIngredient = document.createElement("div");
+    divIngredient.setAttribute("class", "option_ingredient");
+    divIngredient.setAttribute("id", element);
+    divIngredient.textContent = element;
+    optionIngredients.appendChild(divIngredient);
+  });
+  const cheveroUp = document.querySelectorAll(".dropdown-arrow_up");
+  const cheveroDown = document.querySelectorAll(".dropdown-arrow_down");
+  cheveroUp.addEventListener("click", function () {
+    console.log("test up");
+    specific.classList.add("display-none");
+    swapChevron();
+  });
+  cheveroDown.addEventListener("click", function () {
+    specific.classList.remove("display-none");
+    swapChevron();
+  });
+
+  function swapChevron() {
+    if (!cheveroDown.classList.contains("display-none")) {
+      cheveroDown.classList.add("display-none");
+      cheveroUp.classList.remove("display-none");
+    } else {
+      cheveroUp.classList.add("display-none");
+      cheveroDown.classList.remove("display-none");
+    }
+  };
 
 
-dropdown2.onclick = function() {
-    dropdown2.classList.toggle("active")
-}
-
-
-dropdown3.onclick = function() {
-    dropdown3.classList.toggle("active")
-}
-
- function displayDropdownIngredients() {
-    console.log(ingredientSet)
-    ingredientSet.forEach(element => {
-        const divIngredient = document.createElement("div");
-        divIngredient.setAttribute("class", "option_ingredient");
-        divIngredient.setAttribute("id", element);
-        divIngredient.textContent = element;
-        optionIngredients.appendChild(divIngredient);
-    })
-}
-
-// function displayDropdownUstensils() {
-//     ustensileSet.forEach(element => {
-//         const divUstensil = document.createElement("div");
-//         divUstensil.setAttribute("class", "option_ustensils");
-//         divUstensil.textContent = element;
-//         optionUstensiles.appendChild(divUstensil);
-//     })
-// }
-
-// function displayDropdownAppareils() {
-//     appareilSet.forEach(element => {
-//         const divAppareil = document.createElement("div");
-//         divAppareil.setAttribute("class", "option_appareils");
-//         divAppareil.textContent = element;
-//         optionAppareil.appendChild(divAppareil);
-//     })
-// }
-
-// const divs = document.querySelectorAll('.option_ingredient');
-// divs.forEach(el => el.addEventListener('click', event => {
-//     createTag(event.target.getAttribute("id"));
-//   }));
-
-function createTag() {
-    const divTagAdd = document.createElement("div");
-    divTagAdd.setAttribute("class", "")
+  const divTagAdd = document.createElement("div");
+  divTagAdd.setAttribute("class", "");
 }

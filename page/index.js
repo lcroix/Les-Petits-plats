@@ -28,11 +28,8 @@ async function init() {
   // console.log(recipes);
   displayData(recipes.recipes);
   recipes.recipes.forEach((recipe) => {
-    getIngredients(recipe);
-    getAppliance(recipe);
-    getUstensils(recipe);
+    dropdownBehaviour(recipe)
     });
-    displayDropdownIngredients();
     // displayDropdownAppareils();
     // displayDropdownUstensils();
     // displayData(recipes);
@@ -40,42 +37,3 @@ async function init() {
 }
 init();
 
-function displayDropdownIngredients() {
-  console.log(ingredientSet)
-  ingredientSet.forEach(element => {
-      const divIngredient = document.createElement("div");
-      divIngredient.setAttribute("class", "option_ingredient");
-      divIngredient.setAttribute("id", element);
-      divIngredient.textContent = element;
-      optionIngredients.appendChild(divIngredient);
-  })
-}
-
-// function displayDropdownUstensils() {
-//   ustensileSet.forEach(element => {
-//       const divUstensil = document.createElement("div");
-//       divUstensil.setAttribute("class", "option_ustensils");
-//       divUstensil.textContent = element;
-//       optionUstensiles.appendChild(divUstensil);
-//   })
-// }
-
-// function displayDropdownAppareils() {
-//   appareilSet.forEach(element => {
-//       const divAppareil = document.createElement("div");
-//       divAppareil.setAttribute("class", "option_appareils");
-//       divAppareil.textContent = element;
-//       optionAppareil.appendChild(divAppareil);
-//   })
-// }
-
-const divs = document.querySelectorAll('.option_ingredient');
-divs.forEach(el => el.addEventListener('click', event => {
-  console.log('click fais');
-  createTag(event.target.getAttribute("id"));
-}));
-
-// function createTag() {
-//   const divTagAdd = document.createElement("div");
-//   divTagAdd.setAttribute("class", "")
-// }
