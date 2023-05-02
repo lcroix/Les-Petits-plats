@@ -1,7 +1,7 @@
 function recipeFactory(data) {
   const { name, ingredients, time, description } = data;
 
-  function getRecipeCartDOM() {
+  function getRecipeCardDOM() {
 
     //html
     const recipe = document.createElement("div");
@@ -61,5 +61,5 @@ function recipeFactory(data) {
    return recipe
 
   }
-  return {getRecipeCartDOM}
+  return {getRecipeCardDOM}
 }

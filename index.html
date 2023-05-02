@@ -31,7 +31,7 @@
       </div>
 
       <!-- Zone de tags -->
-      <div id="tags-zone" class="mt3 d-inline-flex flex-row justify-content-start align-items-center"></div>
+      <div id="tags-zone"></div>
 
       <!-- Zone filtres de recettes -->
       <div id="filters-zone">
@@ -43,8 +43,10 @@
                           role="combobox">
                           <input id="ingredient-input" class="form-control text-white" type="text"
                               placeholder="Ingredients" aria-label="input ingredients">
-                              <div class="dropdown-arrow_down">&#9660;</div>
-                              <div class="dropdown-arrow_up">&#9650;</div>
+                              <div class="dropdown-arrow">
+                                <div class="dropdown-arrow_down dropdown-arrow">&#9660;</div>
+                                <div class="dropdown-arrow_up dropdown-arrow">&#9650;</div>
+                              </div>
 
                       </div>
                   </div>
@@ -62,8 +64,10 @@
                           role="combobox">
                           <input id="appliance-input" class="form-control text-white" type="text"
                               placeholder="Appareils" aria-label="input appliances">
-                              <div class="dropdown-arrow_down">&#9660;</div>
-                              <div class="dropdown-arrow_up">&#9650;</div>
+                              <div class="dropdown-arrow">
+                                  <div class="dropdown-arrow_down dropdown-arrow">&#9660;</div>
+                                  <div class="dropdown-arrow_up dropdown-arrow">&#9650;</div>
+                                </div>
 
                       </div>
                   </div>
@@ -81,8 +85,10 @@
                           role="combobox">
                           <input id="ustensils-input" class="form-control text-white" type="text"
                               placeholder="Ustensiles" aria-label="input ustensils">
-                              <div class="dropdown-arrow_down">&#9660;</div>
-                              <div class="dropdown-arrow_up">&#9650;</div>
+                              <div class="dropdown-arrow">
+                                <div class="dropdown-arrow_down dropdown-arrow">&#9660;</div>
+                                <div class="dropdown-arrow_up dropdown-arrow">&#9650;</div>
+                              </div>
                       </div>
                   </div>
                   <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
@@ -96,7 +102,7 @@
       </div>
 
       <!-- Zone d'affichage des recettes -->
-      <section id="recipes-zone" class="card" aria-label="liste des recettes"></section>
+      <section id="recipes-zone" class="cards" aria-label="liste des recettes"></section>
   </main>
     <script src="./page/index.js"></script>
     <script src="./factories/index.js"></script>
