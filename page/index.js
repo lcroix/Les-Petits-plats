@@ -9,11 +9,10 @@ async function displayRecipes(recipes) {
   console.log(recipes);
   recipes.forEach((recipe) => {
     const recipeModel = recipeFactory(recipe);
-    // const tagModel = mediaFactory(recipe);
+
     const recipeCardDOM = recipeModel.getRecipeCardDOM();
     recipesSection.appendChild(recipeCardDOM);
-    // const recipeTagDOM = tagModel.getRecipeCartDOM();
-    // recipesSection.appendChild(recipeTagDOM);
+
   });
 }
 function getIngredients(recipes) {
@@ -32,6 +31,7 @@ function getIngredients(recipes) {
 }
 function displayIngredients(ingredients) {
   const optionIngredients = document.querySelector("#ingredientsList");
+  optionIngredients.innerHTML = ''
   ingredients.forEach((ingredient) => {
     const divIngredient = document.createElement("div");
     divIngredient.setAttribute("class", "option_ingredient");
@@ -39,21 +39,32 @@ function displayIngredients(ingredients) {
     divIngredient.textContent = ingredient;
     optionIngredients.appendChild(divIngredient);
   });
-  filter(ingredients);
+ filterIngredients(ingredients)
 }
-const arrow = document.querySelector(".dropdown-arrow");
-const arrowUp = document.querySelector(".dropdown-arrow_up");
-const arrowDown = document.querySelector(".dropdown-arrow_down");
-const listTag = document.querySelector(".accordion-body");
 
-arrowUp.style.display = "none";
-arrowDown.style.display = "flex";
-listTag.style.display = "none";
+function displayIngredientsDropDown() {
+  const arrow = document.querySelector(
+    "#ingredientsDropDown .dropdown-arrow"
+  );
+  const arrowUp = document.querySelector(
+    "#ingredientsDropDown .dropdown-arrow_up"
+  );
+  const arrowDown = document.querySelector(
+    "#ingredientsDropDown .dropdown-arrow_down"
+  );
+  const listTag = document.querySelector(
+    "#ingredientsDropDown .accordion-body"
+  );
 
-arrow.addEventListener("click", function () {
-  displayArrows();
-});
-function displayArrows() {
+  arrowUp.style.display = "none";
+  arrowDown.style.display = "flex";
+  listTag.style.display = "none";
+
+  arrow.addEventListener("click", function () {
+    displayArrows(arrowUp, arrowDown, listTag);
+  });
+}
+function displayArrows(arrowUp, arrowDown, listTag) {
   if (arrowUp.style.display === "none") {
     arrowUp.style.display = "flex";
     arrowDown.style.display = "none";
@@ -64,7 +75,7 @@ function displayArrows() {
     listTag.style.display = "none";
   }
 }
-function filter() {
+function filterIngredients(ingredients) {
   const listIngredients = document.querySelectorAll(".option_ingredient");
   const elementsTag = document.getElementById("tags-zone");
 
@@ -74,33 +85,44 @@ function filter() {
       elementsTag.innerHTML += `<button type="button" class="tag tag-ingredients">${tag}
         <img src="./assets/tag-close.svg" alt="icone de fermeture du tag" class="tag-close">
       </button>`;
-      
+      // getIngredients(recipe,tag)
       // Récupère tous les boutons de fermeture
       const closeTags = document.querySelectorAll(".tag-close");
-      
+       ingredient.remove()
+      const ingredientsFiltered = ingredients.filter( el =>   el !== tag)
+      console.log(tag);
+      displayIngredients(ingredientsFiltered)
+
       // Ajoute un gestionnaire d'événements "click" à chaque bouton de fermeture
       closeTags.forEach(function (closeTag) {
         closeTag.addEventListener("click", function () {
           // Supprime l'élément parent correspondant
           closeTag.parentNode.remove();
+         console.log(closeTag.parentElement.innerText);
+         ingredientsFiltered.push(closeTag.parentNode.innerText)
+         displayIngredients(ingredientsFiltered)
         });
       });
     });
   });
+  // const availableIngredientKeywords = document.getElementById('ingredient-input')
+  
+  //   availableIngredientKeywords.addEventListener('input', function (event) {
+  //     const ingredientSearchText = event.target.value
+  //     console.log(ingredientSearchText);
+  //     displayIngredients(ingredients.filter(function))
+  //   });
 }
+
+
 
 async function init() {
   const recipes = await fetchRecipes();
-  // console.log(recipes);
   displayRecipes(recipes);
   const ingredients = getIngredients(recipes);
   displayIngredients(ingredients);
-  // recipes.forEach((recipe) => {
-  //   dropdownBehaviour(recipe);
+  displayIngredientsDropDown();
 
-  // });
-  // displayDropdownAppareils();
-  // displayDropdownUstensils();
-  // displayData(recipes);
+  // filterIngredients(ingredients);
 }
 init();
