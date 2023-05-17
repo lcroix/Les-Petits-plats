@@ -27,7 +27,8 @@ function getIngredients(recipes) {
       }
     }
   }
-  return ingredients;
+  return ingredients.sort();
+  //.sort pour le tri pas ordre alphabétique
 }
 function displayIngredients(ingredients) {
   const optionIngredients = document.querySelector("#ingredientsList");
@@ -100,21 +101,38 @@ function filterIngredients(ingredients) {
           closeTag.parentNode.remove();
          console.log(closeTag.parentElement.innerText);
          ingredientsFiltered.push(closeTag.parentNode.innerText)
-         displayIngredients(ingredientsFiltered)
+         displayIngredients(ingredientsFiltered.sort())
         });
       });
     });
   });
-  // const availableIngredientKeywords = document.getElementById('ingredient-input')
+  const availableIngredientKeywords = document.getElementById('ingredient-input')
   
-  //   availableIngredientKeywords.addEventListener('input', function (event) {
-  //     const ingredientSearchText = event.target.value
-  //     console.log(ingredientSearchText);
-  //     displayIngredients(ingredients.filter(function))
-  //   });
-}
+    availableIngredientKeywords.addEventListener('input', function (event) {
+      const listTag = document.querySelector(
+        "#ingredientsDropDown .accordion-body"
+      );
+      const arrowUp = document.querySelector(
+        "#ingredientsDropDown .dropdown-arrow_up"
+      );
+      const arrowDown = document.querySelector(
+        "#ingredientsDropDown .dropdown-arrow_down"
+      );
+      listTag.style.display = "block";
+      arrowUp.style.display = "flex";
+      arrowDown.style.display = "none";
+      const ingredientSearchText = event.target.value.toLowerCase();
+      console.log(ingredientSearchText);
+      displayIngredients(ingredients)
+      const filteredIngredients = ingredients.filter(function(ingredient) {
+        return ingredient.toLowerCase().includes(ingredientSearchText);
+      });
+      displayIngredients(filteredIngredients);
+    
+    });
+    
 
-
+  }
 
 async function init() {
   const recipes = await fetchRecipes();
