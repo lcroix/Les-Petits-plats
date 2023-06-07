@@ -237,30 +237,30 @@ header {
   margin-right: 13px;
 }
 
-.tag-ingredients {
+.tag-ingredients-ingredientsList {
   background-color: #3282f7;
 }
 
-.tag-ingredients:hover,
-.tag-ingredient:focus {
+.tag-ingredients-ingredientsList:hover,
+.tag-ingredient-ingredientsList:focus {
   box-shadow: 0px 0px 20px 3px rgba(50, 130, 247, 0.9);
 }
 
-.tag-appliances {
+.tag-ingredients-appliancesList {
   background-color: #68d9a4;
 }
 
-.tag-appliances:hover,
-.tag-appliance:focus {
+.tag-ingredients-appliancesList:hover,
+.tag-ingredients-appliancesList:focus {
   box-shadow: 0px 0px 20px 3px rgba(104, 217, 164, 0.9);
 }
 
-.tag-ustensils {
+.tag-ingredients-ustensilsList {
   background-color: #ed6454;
 }
 
-.tag-ustensils:hover,
-.tag-ustensil:focus {
+.tag-ingredients-ustensilsList:hover,
+.tag-ingredients-ustensilsList:focus {
   box-shadow: 0px 0px 20px 3px rgba(237, 99, 84, 0.9);
 }
 
