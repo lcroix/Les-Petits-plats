@@ -5,7 +5,7 @@ function recipeFactory(data) {
 
     //html
     const recipe = document.createElement("div");
-    const fakeImg = document.createElement("div");
+    const fakeImg = document.createElement("img");
     const infoContainer = document.createElement("div");
     const infoFirstDiv = document.createElement("div");
     const recipeName = document.createElement("p");
@@ -18,10 +18,11 @@ function recipeFactory(data) {
     //attribute
     recipe.setAttribute('class', 'recipe');
     fakeImg.setAttribute('class', 'fakeImg');
+    fakeImg.setAttribute('src','assets/logo_lespetitsplats.png')
     infoContainer.setAttribute('class', 'infoContainer');
     infoFirstDiv.setAttribute('class','infoFirstDiv');
     recipeName.setAttribute('class', 'recipeName');
-    timer.setAttribute('src', 'img/timer.png' );
+    timer.setAttribute('src', 'assets/time.svg' );
     timer.setAttribute('class', 'timer' );
     textTime.setAttribute('class','textTime');
     infoSecondDiv.setAttribute('class','infoSecondDiv');
@@ -49,10 +50,10 @@ function recipeFactory(data) {
     }
    // appendChild
    recipe.appendChild(fakeImg);
-   recipe.appendChild(timer);
    recipe.appendChild(infoContainer);
    infoContainer.appendChild(infoFirstDiv);
    infoFirstDiv.appendChild(recipeName);
+   infoFirstDiv.appendChild(timer);
    infoFirstDiv.appendChild(textTime);
    infoContainer.appendChild(infoSecondDiv);
    infoSecondDiv.appendChild(ingredientsDiv);

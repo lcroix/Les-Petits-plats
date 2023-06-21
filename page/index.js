@@ -209,13 +209,13 @@ function filterIngredients(ingredients, recipes, option) {
   });
 }
 function filterTag(recipes, tag, option) {
-  console.log(tag);
   if (option == "ingredientsList") {
     const recipesByIngrefients = recipes.filter((filterTag) =>
       filterTag.ingredients.find((el) => el.ingredient == tag)
     );
     displayAppareil(getAppareilles(recipesByIngrefients));
     displayUstensil(getUstensiles(recipesByIngrefients));
+    searchForAllParameters(recipesByIngrefients)
     console.log(recipesByIngrefients);
   } else if (option == "appliancesList") {
     const recipesByAppliances = recipes.filter(
@@ -223,6 +223,7 @@ function filterTag(recipes, tag, option) {
     );
     displayIngredients(getIngredients(recipesByAppliances));
     displayUstensil(getUstensiles(recipesByAppliances));
+    searchForAllParameters(recipesByAppliances)
     console.log(recipesByAppliances);
   } else {
     const recipesByUstensils = recipes.filter((filterTag) =>
@@ -230,7 +231,7 @@ function filterTag(recipes, tag, option) {
     );
     displayIngredients(getIngredients(recipesByUstensils));
     displayAppareil(getAppareilles(recipesByUstensils));
-    console.log(recipesByUstensils);
+    searchForAllParameters(recipesByUstensils)
   }
 }
 
@@ -254,6 +255,7 @@ function recipeIngredients(recipe, tag, type) {
 //algo de recherche
 
 function searchForAllParameters(recipes) {
+  console.log('search',recipes);
   const searchInput = document.querySelector(".form-control");
   searchInput.addEventListener("input", function (el) {
     if (el.target.value.length > 2) {
@@ -273,8 +275,15 @@ function searchForAllParameters(recipes) {
           )
       );
       displayRecipes(filteredArr);
+      displayUstensil(getUstensiles(filteredArr));
+      displayIngredients(getIngredients(filteredArr));
+      displayAppareil(getAppareilles(filteredArr));
+      console.log(filteredArr);
     } else {
       displayRecipes(recipes);
+      displayUstensil(getUstensiles(recipes));
+      displayIngredients(getIngredients(recipes));
+      displayAppareil(getAppareilles(recipes));
     }
   });
 }
@@ -299,6 +308,7 @@ async function init() {
   const ustensils = getUstensiles(recipes);
   displayUstensil(ustensils, recipes);
   displayDropDown(ustensils, ustensilsDropDown, displayUstensil, recipes);
-  searchForAllParameters(recipes);
+   searchForAllParameters(recipes);
+ 
 }
 init();
