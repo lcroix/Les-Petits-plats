@@ -1,7 +1,10 @@
 function recipeFactory(data) {
   const { name, ingredients, time, description } = data;
 
+    
   function getRecipeCardDOM() {
+
+
 
     //html
     const recipe = document.createElement("div");
@@ -58,9 +61,19 @@ function recipeFactory(data) {
    infoContainer.appendChild(infoSecondDiv);
    infoSecondDiv.appendChild(ingredientsDiv);
    infoSecondDiv.appendChild(descriptionText);
-
+   
+   
    return recipe
-
+   
   }
+  
   return {getRecipeCardDOM}
+}
+function noRecipes() {
+  console.log("test");
+  const recipe = document.createElement("div");
+  const noRecipe = document.createElement("p");
+  recipe.appendChild(noRecipe);
+  noRecipe.textContent = 'Aucune recette ne correspond à votre critère…';
+  return noRecipe;
 }
