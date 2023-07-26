@@ -3,6 +3,7 @@ async function fetchRecipes() {
   const responseJSON = await response.json();
   return responseJSON.recipes;
 }
+let tagbtn = [];
 
 async function displayRecipes(recipes) {
   const recipesSection = document.querySelector(".cards");
@@ -58,13 +59,19 @@ function getUstensiles(recipes) {
 function displayIngredients(ingredients, recipes) {
   const optionIngredients = document.querySelector("#ingredientsList");
   optionIngredients.innerHTML = "";
+
   ingredients.forEach((ingredient) => {
-    const divIngredient = document.createElement("div");
-    divIngredient.setAttribute("class", "option");
-    divIngredient.setAttribute("id", ingredient);
-    divIngredient.textContent = ingredient;
-    optionIngredients.appendChild(divIngredient);
+    const tagIsInList = tagbtn.includes(ingredient);
+
+    if (!tagIsInList) {
+      const divIngredient = document.createElement("div");
+      divIngredient.setAttribute("class", "option");
+      divIngredient.setAttribute("id", ingredient);
+      divIngredient.textContent = ingredient;
+      optionIngredients.appendChild(divIngredient);
+    }
   });
+
   filterIngredients(ingredients, recipes, optionIngredients);
 }
 
@@ -72,11 +79,14 @@ function displayAppareil(appliances, recipes) {
   const optionappliances = document.querySelector("#appliancesList");
   optionappliances.innerHTML = "";
   appliances.forEach((appliance) => {
+    const tagIsInList = tagbtn.includes(appliance);
+    if (!tagIsInList) {
     const divAppliance = document.createElement("div");
     divAppliance.setAttribute("class", "option");
     divAppliance.setAttribute("id", appliance);
     divAppliance.textContent = appliance;
     optionappliances.appendChild(divAppliance);
+    }
   });
   filterIngredients(appliances, recipes, optionappliances);
 }
@@ -85,11 +95,14 @@ function displayUstensil(ustensils, recipes) {
   const optionaustensils = document.querySelector("#ustensilsList");
   optionaustensils.innerHTML = "";
   ustensils.forEach((ustensils) => {
+    const tagIsInList = tagbtn.includes(ustensils);
+    if (!tagIsInList) {
     const divUstensils = document.createElement("div");
     divUstensils.setAttribute("class", "option");
     divUstensils.setAttribute("id", ustensils);
     divUstensils.textContent = ustensils;
     optionaustensils.appendChild(divUstensils);
+    }
   });
   filterIngredients(ustensils, recipes, optionaustensils);
 }
@@ -151,9 +164,18 @@ function filterIngredients(ingredients, recipes, option) {
   listIngredients.forEach(function (ingredient) {
     ingredient.addEventListener("click", function (el) {
       const tag = el.target.innerHTML;
-      elementsTag.innerHTML += `<button type="button" class="tag tag-ingredients-${option.id}">${tag}
-        <img src="./assets/tag-close.svg" alt="icone de fermeture du tag" class="tag-close">
-      </button>`;
+      tagbtn.push(tag);
+      const existingTags = elementsTag.querySelectorAll(".tag");
+
+      // Vérifie si le tag existe déjà dans la liste
+      const tagAlreadyExists = Array.from(existingTags).some((existingTag) => existingTag.innerText.trim() === tag);
+
+      // Si le tag existe déjà, ne l'ajoute pas à nouveau
+      if (!tagAlreadyExists) {
+        elementsTag.innerHTML += `<button type="button" class="tag tag-ingredients-${option.id}">${tag}
+          <img src="./assets/tag-close.svg" alt="icone de fermeture du tag" class="tag-close">
+        </button>`;
+      }
 
       // Récupère tous les boutons de fermeture
       const closeTags = document.querySelectorAll(".tag-close");
@@ -193,6 +215,8 @@ function filterIngredients(ingredients, recipes, option) {
         closeTag.addEventListener("click", function () {
           // Supprime l'élément parent correspondant
           closeTag.parentNode.remove();
+          removeTag(tag);
+
 
           // Met à jour les listes d'appareils et d'ustensiles
           const selectedTags = elementsTag.querySelectorAll(".tag");
@@ -232,6 +256,13 @@ function filterIngredients(ingredients, recipes, option) {
     });
   });
 }
+function removeTag(tag) {
+  const index = tagbtn.indexOf(tag);
+  if (index !== -1) {
+    tagbtn.splice(index, 1);
+  }
+}
+
 
 function filterTag(recipes, tag, option) {
   if (option == "ingredientsList") {
@@ -248,7 +279,6 @@ function filterTag(recipes, tag, option) {
     displayIngredients(getIngredients(recipesByAppliances));
     displayUstensil(getUstensiles(recipesByAppliances));
     searchForAllParameters(recipesByAppliances)
-    console.log('ici');
   } else {
     const recipesByUstensils = recipes.filter((filterTag) =>
       filterTag.ustensils.find((el) => el == tag)
@@ -279,7 +309,6 @@ function recipeIngredients(recipe, tag, type) {
 //algo de recherche
 
 function searchForAllParameters(recipes) {
-  console.log('search',recipes);
   const searchInput = document.querySelector(".form-control");
   searchInput.addEventListener("input", function (el) {
     if (el.target.value.length > 2) {
@@ -302,7 +331,6 @@ function searchForAllParameters(recipes) {
       displayUstensil(getUstensiles(filteredArr));
       displayIngredients(getIngredients(filteredArr));
       displayAppareil(getAppareilles(filteredArr));
-      console.log(filteredArr);
     } else {
       displayRecipes(recipes);
       displayUstensil(getUstensiles(recipes));

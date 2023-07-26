@@ -69,8 +69,7 @@ function recipeFactory(data) {
   
   return {getRecipeCardDOM}
 }
-function noRecipes(recipes) {
-  console.log("test");
+function noRecipes() {
   const recipe = document.createElement("div");
   const noRecipe = document.createElement("p");
   recipe.appendChild(noRecipe);
