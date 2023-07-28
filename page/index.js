@@ -8,6 +8,11 @@ let tagbtn = [];
 async function displayRecipes(recipes) {
   const recipesSection = document.querySelector(".cards");
   recipesSection.innerHTML = "";
+  if (recipes.length === 0) {
+    const noRecipesResult = noRecipes(recipes);
+    recipesSection.appendChild(noRecipesResult);
+  }
+
   recipes.forEach((recipe) => {
     const recipeModel = recipeFactory(recipe);
 
@@ -191,12 +196,14 @@ function filterIngredients(ingredients, recipes, option) {
         displayIngredients(getIngredients(recipesByIngredients), recipesByIngredients, document.querySelector("#ingredientsDropDown"));
         displayAppareil(getAppareilles(recipesByIngredients), recipesByIngredients, document.querySelector("#applianceDropDown"));
         displayUstensil(getUstensiles(recipesByIngredients), recipesByIngredients, document.querySelector("#ustensilsDropDown"));
+        recipeIngredients(recipes, tag, option.id);
         // Autres mises à jour ou actions en fonction de la suppression du tag
       } else if (option.id == "appliancesList") {
         const recipesByAppliances = recipes.filter((recipe) => recipe.appliance == tag);
         displayIngredients(getIngredients(recipesByAppliances), recipesByAppliances, document.querySelector("#ingredientsDropDown"));
         displayAppareil(getAppareilles(recipesByAppliances), recipesByAppliances, document.querySelector("#applianceDropDown"));
         displayUstensil(getUstensiles(recipesByAppliances), recipesByAppliances, document.querySelector("#ustensilsDropDown"));
+        recipeIngredients(recipes, tag, option.id);
         // Autres mises à jour ou actions en fonction de la suppression du tag
       } else {
         const recipesByUstensils = recipes.filter((recipe) =>
@@ -206,7 +213,7 @@ function filterIngredients(ingredients, recipes, option) {
         // Seulement la liste des ustensiles doit être mise à jour ici
         displayAppareil(getAppareilles(recipesByUstensils), recipesByUstensils, document.querySelector("#applianceDropDown"));
         displayUstensil(getUstensiles(recipesByUstensils), recipesByUstensils, document.querySelector("#ustensilsDropDown"));
-
+        recipeIngredients(recipes, tag, option.id);
         // Autres mises à jour ou actions en fonction de la suppression du tag
       }
 
