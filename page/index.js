@@ -19,11 +19,11 @@ async function displayRecipes(recipes) {
 
     const recipeCardDOM = recipeModel.getRecipeCardDOM();
     recipesSection.appendChild(recipeCardDOM);
-    console.log(recipes);
+  
   });
 }
 function getIngredients(recipes) {
-  console.log(recipes);
+
   const ingredients = [];
   for (const recipe of recipes) {
     for (const ingredient of recipe.ingredients) {
@@ -52,6 +52,7 @@ function getAppareilles(recipes) {
 }
 
 function getUstensiles(recipes) {
+
   const ustensils = [];
   for (const recipe of recipes) {
     for (const ustensil of recipe.ustensils) {
@@ -67,7 +68,7 @@ function getUstensiles(recipes) {
 function displayIngredients(ingredients, recipes) {
   const optionIngredients = document.querySelector("#ingredientsList");
   optionIngredients.innerHTML = "";
-  console.log(ingredients);
+
   ingredients.forEach((ingredient) => {
     const tagIsInList = tagbtn.includes(ingredient);
 
@@ -102,13 +103,13 @@ function displayAppareil(appliances, recipes) {
 function displayUstensil(ustensils, recipes) {
   const optionaustensils = document.querySelector("#ustensilsList");
   optionaustensils.innerHTML = "";
-  ustensils.forEach((ustensils) => {
-    const tagIsInList = tagbtn.includes(ustensils);
+  ustensils.forEach((ustensil) => {
+    const tagIsInList = tagbtn.includes(ustensil);
     if (!tagIsInList) {
       const divUstensils = document.createElement("div");
       divUstensils.setAttribute("class", "option");
-      divUstensils.setAttribute("id", ustensils);
-      divUstensils.textContent = ustensils;
+      divUstensils.setAttribute("id", ustensil);
+      divUstensils.textContent = ustensil;
       optionaustensils.appendChild(divUstensils);
     }
   });
@@ -200,8 +201,10 @@ function filterIngredients(ingredients, recipes, option) {
 
       if (option.id == "ingredientsList") {
         const recipesByIngredients = recipes.filter((recipe) =>
-          recipe.ingredients.find((el) => el.ingredient == tag)
-        );
+        tagbtn.every((tag) => 
+          recipe.ingredients.some((el) => el.ingredient == tag)
+        )
+      );
         displayIngredients(
           getIngredients(recipesByIngredients),
           recipesByIngredients,
@@ -220,9 +223,9 @@ function filterIngredients(ingredients, recipes, option) {
         recipeIngredients(recipes, tag, option.id);
         // Autres mises à jour ou actions en fonction de la suppression du tag
       } else if (option.id == "appliancesList") {
-        const recipesByAppliances = recipes.filter(
-          (recipe) => recipe.appliance == tag
-        );
+        const recipesByAppliances = recipes.filter((recipe) =>
+        tagbtn.every((tag)=>recipe.appliance == tag )
+    );
         displayIngredients(
           getIngredients(recipesByAppliances),
           recipesByAppliances,
@@ -242,8 +245,10 @@ function filterIngredients(ingredients, recipes, option) {
         // Autres mises à jour ou actions en fonction de la suppression du tag
       } else {
         const recipesByUstensils = recipes.filter((recipe) =>
-          recipe.ustensils.find((el) => el == tag)
-        );
+        tagbtn.every((tag) => 
+          recipe.ustensils.some((el)=> el == tag)
+        )
+      );
         displayIngredients(
           getIngredients(recipesByUstensils),
           recipesByUstensils,
@@ -300,7 +305,6 @@ function filterIngredients(ingredients, recipes, option) {
                 const hasUstensil = recipe.ustensils.some((ustensil) =>
                 selectedUstensils.includes(ustensil)
                 );
-                console.log('select',selectedIngredients);
                 return hasIngredient || hasAppliance || hasUstensil
               });
           displayRecipes(remainingRecipes);
