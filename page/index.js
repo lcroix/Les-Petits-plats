@@ -430,38 +430,8 @@ function recipeIngredients(recipe, tag, type) {
 
 //algo de recherche
 
-function searchForAllParameters(recipes) {
-  const searchInput = document.querySelector(".form-control");
-  searchInput.addEventListener("input", function (el) {
-    if (el.target.value.length > 2) {
-      searchInput.textContent = "";
 
-      const searchedString = el.target.value.toLowerCase();
-      const filteredArr = recipes.filter(
-        (recipes) =>
-          recipes.name.toLowerCase().includes(searchedString) ||
-          recipes.description.toLowerCase().includes(searchedString) ||
-          recipes.ingredients.some((el) =>
-            el.ingredient.toLowerCase().includes(searchedString)
-          ) ||
-          recipes.appliance.toLowerCase().includes(searchedString) ||
-          recipes.ustensils.some((el) =>
-            el.toLowerCase().includes(searchedString)
-          )
-      );
-      displayRecipes(filteredArr);
-      displayUstensil(getUstensiles(filteredArr), recipes);
-      displayIngredients(getIngredients(filteredArr), recipes);
-      displayAppareil(getAppareilles(filteredArr), recipes);
-    } else {
-      displayRecipes(recipes);
-      displayUstensil(getUstensiles(recipes));
-      displayIngredients(getIngredients(recipes));
-      displayAppareil(getAppareilles(recipes));
-    }
-  });
-}
-//algo de recherche
+
 
 function searchForAllParameters(recipes) {
   const searchInput = document.querySelector(".form-control");
@@ -469,19 +439,45 @@ function searchForAllParameters(recipes) {
     if (el.target.value.length > 2) {
       searchInput.textContent = "";
 
-      const searchedString = el.target.value.toLowerCase();
-      const filteredArr = recipes.filter(
-        (recipes) =>
-          recipes.name.toLowerCase().includes(searchedString) ||
-          recipes.description.toLowerCase().includes(searchedString) ||
-          recipes.ingredients.some((el) =>
-            el.ingredient.toLowerCase().includes(searchedString)
-          ) ||
-          recipes.appliance.toLowerCase().includes(searchedString) ||
-          recipes.ustensils.some((el) =>
-            el.toLowerCase().includes(searchedString)
-          )
-      );
+      const searchedString = el.target.value;
+      const filteredArr = [];
+
+      const regex = new RegExp(searchedString, "i");
+
+      for (let i = 0; i < recipes.length; i++) {
+        const recipe = recipes[i];
+        const lowerCaseName = recipe.name;
+        const lowerCaseDescription = recipe.description;
+
+        let ingredientMatches = false;
+        for (let j = 0; j < recipe.ingredients.length; j++) {
+          const ingredient = recipe.ingredients[j].ingredient;
+          if (regex.test(ingredient)) {
+            ingredientMatches = true;
+            break;
+          }
+        }
+
+        let ustensilMatches = false;
+        for (let k = 0; k < recipe.ustensils.length; k++) {
+          const ustensil = recipe.ustensils[k];
+          if (regex.test(ustensil)) {
+            ustensilMatches = true;
+            break;
+          }
+        }
+
+        if (
+          lowerCaseName.includes(searchedString) ||
+          lowerCaseDescription.includes(searchedString) ||
+          ingredientMatches ||
+          recipe.appliance.toLowerCase().includes(searchedString) ||
+          ustensilMatches
+        ) {
+          filteredArr.push(recipe);
+        }
+      }
+
       displayRecipes(filteredArr);
       displayUstensil(getUstensiles(filteredArr));
       displayIngredients(getIngredients(filteredArr));
